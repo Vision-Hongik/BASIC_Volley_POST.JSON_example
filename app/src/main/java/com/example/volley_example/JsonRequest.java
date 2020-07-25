@@ -9,9 +9,9 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-public class LoginRequest extends JsonObjectRequest {
+public class JsonRequest extends JsonObjectRequest {
     //web 주소
-    private static final String LOGIN_REQUEST_URL = IpPath.WEBIP + "/post";
+    private static final String REQUEST_URL = IpPath.WEBIP + "/post";
     private static JSONObject jsonBody = new JSONObject();
 
     // string,string 해쉬맵
@@ -20,9 +20,9 @@ public class LoginRequest extends JsonObjectRequest {
 
 
     //생성자
-    public LoginRequest(byte[] content, Response.Listener<JSONObject> listener) {
+    public JsonRequest(byte[] content, Response.Listener<JSONObject> listener) {
         //post형식으로 전송
-        super(Method.POST,LOGIN_REQUEST_URL,null,listener,null);
+        super(Method.POST,REQUEST_URL,null,listener,null);
         body = content;
         //매개변수 저장 , key : value
     }

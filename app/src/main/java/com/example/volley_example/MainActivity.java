@@ -13,7 +13,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 String temp = "hello!";
 
                 // EditText에 들어온 ID와 PW로 로그인 시도!
-                LoginRequest loginRequest = new LoginRequest(temp.getBytes(), responseListener);
+                JsonRequest jsonRequest = new JsonRequest(temp.getBytes(), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                queue.add(loginRequest);
+                queue.add(jsonRequest);
             }
         });
     }
