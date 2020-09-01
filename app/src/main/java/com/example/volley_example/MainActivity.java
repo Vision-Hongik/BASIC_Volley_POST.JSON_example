@@ -29,6 +29,7 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.concurrent.Executor;
@@ -45,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Volley 전송시 리스너 객체
         // Response received from the server 서버에서 내용을 받았을때 처리할 내용!
-        final Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+        final Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
 
             @Override
-            public void onResponse(JSONObject response) {
-                Log.e("h", "Response: " + response);
+            public void onResponse(JSONArray response) {
+                Log.e("h","Resonps!!");
+                Log.e("h", "Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "sucsess", Toast.LENGTH_LONG).show();
             }
         };
+
 
         // Location 정보 획득시 리스너 객체
         final LocationListener locationListener = new LocationListener() {

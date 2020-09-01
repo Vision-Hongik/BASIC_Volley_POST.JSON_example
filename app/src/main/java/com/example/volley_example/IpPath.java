@@ -1,5 +1,5 @@
 package com.example.volley_example;
 
 public class IpPath {
-    static final String  WEBIP = "http://182.227.43.208:9000";
+    static final String  WEBIP = "http://3.18.204.254:5000";
 }

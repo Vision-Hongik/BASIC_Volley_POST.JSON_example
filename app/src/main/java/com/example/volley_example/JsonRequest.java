@@ -2,14 +2,17 @@ package com.example.volley_example;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Map;
 
 
-public class JsonRequest extends JsonObjectRequest {
+public class JsonRequest extends JsonArrayRequest {
     //web 주소
-    private static final String REQUEST_URL = IpPath.WEBIP + "/post";
+    private static final String REQUEST_URL = IpPath.WEBIP + "/read";
     private static JSONObject jsonBody = new JSONObject();
 
     // string,string 해쉬맵
@@ -18,7 +21,7 @@ public class JsonRequest extends JsonObjectRequest {
 
 
     //생성자
-    public JsonRequest(byte[] content, Response.Listener<JSONObject> listener) {
+    public JsonRequest(byte[] content, Response.Listener<JSONArray> listener) {
         //post형식으로 전송
         super(Method.POST,REQUEST_URL,null,listener,null);
         body = content;
@@ -43,4 +46,5 @@ public class JsonRequest extends JsonObjectRequest {
         }
         return j.toString().getBytes();
     }
+
 }
