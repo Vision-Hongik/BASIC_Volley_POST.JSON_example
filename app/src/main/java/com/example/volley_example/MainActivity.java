@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         // Volley 전송시 리스너 객체
         // Response received from the server 서버에서 내용을 받았을때 처리할 내용!
         final Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
@@ -114,11 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
     } // oncreate end
-
-
 
 
 
