@@ -38,61 +38,18 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue queue;
     private LocationRequest locationRequest;
     private MyGps myGps;
-
+    private Service service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        // Volley 전송시 리스너 객체
-        // Response received from the server 서버에서 내용을 받았을때 처리할 내용!
-        final Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-                Log.e("h","Resonps!!");
-                Log.e("h", "Response: " + response.toString());
-                Toast.makeText(getApplicationContext(), "sucsess", Toast.LENGTH_LONG).show();
-            }
-        };
-
-
-        // Location 정보 획득시 리스너 객체
-        final LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-                Log.e("t", "startGps:" + location.getProvider());
-                Log.e("t", "startGps:" + location.getLongitude());
-                Log.e("t", "startGps:" + location.getLatitude());
-                Log.e("t", "정확" + location.getAccuracy());
-
-            }
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                Log.e("t", "startGps: 상태변화");
-            }
-            @Override
-            public void onProviderEnabled(String provider) {
-                Log.e("t", "startGps: 사용가능");
-                myGps.startGps();
-            }
-            @Override
-            public void onProviderDisabled(String provider) {
-                Log.e("t", "startGps: 사용불가");
-            }
-        };
-
-
         setContentView(R.layout.activity_main);
 
         // GPS가 꺼져있다면 On Dialog
         createLocationRequest();
         turn_on_GPS_dialog();
 
-
+        //service = new Service();
         //Gps set listener
         myGps = new MyGps(MainActivity.this,locationListener);
 
@@ -115,10 +72,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     } // oncreate end
 
 
+//--Listener----------------------------------------------------------------------------------------------------------------------------------------
+
+
+    // Server Volley 전송시 리스너 객체
+    // Response received from the server 서버에서 내용을 받았을때 처리할 내용!
+    final Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+
+        @Override
+        public void onResponse(JSONArray response) {
+            Log.e("h","Resonps!!");
+            Log.e("h", "Response: " + response.toString());
+            Toast.makeText(getApplicationContext(), "sucsess", Toast.LENGTH_LONG).show();
+        }
+    };
+
+
+    // GPS Location 정보 획득시 리스너 객체
+    final LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+
+            Log.e("t", "startGps:" + location.getProvider());
+            Log.e("t", "startGps:" + location.getLongitude());
+            Log.e("t", "startGps:" + location.getLatitude());
+            Log.e("t", "정확" + location.getAccuracy());
+
+        }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.e("t", "startGps: 상태변화");
+        }
+        @Override
+        public void onProviderEnabled(String provider) {
+            Log.e("t", "startGps: 사용가능");
+            myGps.startGps();
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+            Log.e("t", "startGps: 사용불가");
+        }
+    };
+
+
+
+
+//--Function----------------------------------------------------------------------------------------------------------------------------------------
 
     // GPS 꺼져있을 경우 alert dialog
     protected void createLocationRequest()
