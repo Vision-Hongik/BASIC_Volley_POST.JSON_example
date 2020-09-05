@@ -3,7 +3,6 @@ package com.example.volley_example;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +15,6 @@ public class JsonRequest extends JsonArrayRequest {
     private static JSONObject jsonBody = new JSONObject();
 
     // string,string 해쉬맵
-    private Map<String, String> params;
     private byte[] body;
 
 
@@ -25,10 +23,7 @@ public class JsonRequest extends JsonArrayRequest {
         //post형식으로 전송
         super(Method.GET,REQUEST_URL,null,listener,null);
         body = content;
-        //매개변수 저장 , key : value
     }
-
-
 
 
     @Override

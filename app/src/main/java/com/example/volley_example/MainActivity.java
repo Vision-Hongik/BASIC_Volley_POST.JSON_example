@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat;
 
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Build;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         //start!
         myGps.startGps();
 
+        service = new Service();
+
 
         // activity 객체들
         Button bLogin = (Button) findViewById(R.id.bSignIn);
@@ -66,11 +71,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String temp = "hello!";
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.ocrtest);
                 Log.e("t", "Send! ");
                 // EditText에 들어온 ID와 PW로 로그인 시도!
-                JsonRequest jsonRequest = new JsonRequest(temp.getBytes(), responseListener);
+                JsonRequest jsonRequest = new JsonRequest(temp.getBytes(), jsonArrayListener);
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 queue.add(jsonRequest);
+
+                OcrRequest ocrRequest = new OcrRequest(bitmap,ocrListener);
+                queue.add(ocrRequest);
             }
         });
 
@@ -82,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Server Volley 전송시 리스너 객체
     // Response received from the server 서버에서 내용을 받았을때 처리할 내용!
-    final Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>() {
+    final Response.Listener<JSONArray> jsonArrayListener = new Response.Listener<JSONArray>() {
 
         @Override
         public void onResponse(JSONArray response) {
@@ -91,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "sucsess", Toast.LENGTH_LONG).show();
 
         } //onResponse
+    };
+
+    final Response.Listener<JSONObject> ocrListener = new Response.Listener<JSONObject>() {
+        @Override
+        public void onResponse(JSONObject response) {
+            Log.e("h", "Response: " + response.toString());
+        }
     };
 
 
