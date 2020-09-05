@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.Executor;
@@ -58,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         // activity 객체들
-        final Button bLogin = (Button) findViewById(R.id.bSignIn);
-
+        Button bLogin = (Button) findViewById(R.id.bSignIn);
         // 전송 버튼!! 리스너
         bLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String temp = "hello!";
+                Log.e("t", "Send! ");
                 // EditText에 들어온 ID와 PW로 로그인 시도!
                 JsonRequest jsonRequest = new JsonRequest(temp.getBytes(), responseListener);
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
@@ -87,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             Log.e("h","Resonps!!");
             Log.e("h", "Response: " + response.toString());
             Toast.makeText(getApplicationContext(), "sucsess", Toast.LENGTH_LONG).show();
-        }
+
+        } //onResponse
     };
 
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class JsonRequest extends JsonArrayRequest {
     //web 주소
-    private static final String REQUEST_URL = IpPath.WEBIP + "/read";
+    private static final String REQUEST_URL = IpPath.WEBIP + "/mapdata/sangsu";
     private static JSONObject jsonBody = new JSONObject();
 
     // string,string 해쉬맵
@@ -23,7 +23,7 @@ public class JsonRequest extends JsonArrayRequest {
     //생성자
     public JsonRequest(byte[] content, Response.Listener<JSONArray> listener) {
         //post형식으로 전송
-        super(Method.POST,REQUEST_URL,null,listener,null);
+        super(Method.GET,REQUEST_URL,null,listener,null);
         body = content;
         //매개변수 저장 , key : value
     }
